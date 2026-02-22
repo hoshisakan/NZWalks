@@ -1,6 +1,8 @@
 using NZWalks.API.Data;
 using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Repositories;
+using NZWalks.API.Mappings;
+using AutoMapper;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddDbContext<NZWalksDbContext>(options =>
 );
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+
+builder.Services.AddAutoMapper(cfg => { }, typeof(AutoMapperProfiles).Assembly);
 
 var app = builder.Build();
 
