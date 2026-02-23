@@ -9,6 +9,8 @@ using NZWalks.API.Repositories;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
+using NZWalks.API.CustomActionFilters;
 
 
 namespace NZWalks.API.Controllers
@@ -53,6 +55,7 @@ namespace NZWalks.API.Controllers
         }
         
         [HttpPost]
+        [ValidateModel]
         public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
         {
             var walk = _mapper.Map<Walk>(addWalkRequestDto);
@@ -66,6 +69,7 @@ namespace NZWalks.API.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [ValidateModel]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWalkRequestDto updateWalkRequestDto)
         {
             var walk = _mapper.Map<Walk>(updateWalkRequestDto);
