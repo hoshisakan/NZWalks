@@ -446,3 +446,5 @@ $RECYCLE.BIN/
 *.key
 *.crt
 *.pfx
+
+api/NZWalks.API/Images/
