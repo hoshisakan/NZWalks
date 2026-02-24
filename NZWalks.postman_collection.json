@@ -618,25 +618,24 @@
           "name": "Delete",
           "request": {
             "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
-                  "type": "string"
-                }
-              ]
+              "type": "noauth"
             },
             "method": "DELETE",
-            "header": [],
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5MjY2MjEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.BzQGnovLuBwF5J49hkrzdKSsO2vddK1SPiJPvW-aJr0",
+                "type": "text"
+              }
+            ],
             "url": {
-              "raw": "{{url}}/walks/e4606bfc-c72f-4c6d-8222-08de729031f1",
+              "raw": "{{url}}/walks/db11c936-6866-4800-7f28-08de73878c46",
               "host": [
                 "{{url}}"
               ],
               "path": [
                 "walks",
-                "e4606bfc-c72f-4c6d-8222-08de729031f1"
+                "db11c936-6866-4800-7f28-08de73878c46"
               ]
             }
           },
@@ -655,6 +654,33 @@
             "body": {
               "mode": "raw",
               "raw": "{\r\n  \"username\": \"reader01\",\r\n  \"email\": \"reader@nzwalks.com\",\r\n  \"password\": \"Reader@123\",\r\n  \"roles\": [\r\n    \"Reader\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register for ReaderWriter role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"readerWriter02\",\r\n  \"email\": \"readerWriter02@nzwalks.com\",\r\n  \"password\": \"ReaderWriter@123\",\r\n  \"roles\": [\r\n    \"Reader\",\r\n    \"Writer\"\r\n  ]\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -736,6 +762,33 @@
             "body": {
               "mode": "raw",
               "raw": "{\r\n  \"email\": \"reader@nzwalks.com\",\r\n  \"password\": \"Reader@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with ReaderWriter role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"readerWriter02@nzwalks.com\",\r\n  \"password\": \"ReaderWriter@123\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
