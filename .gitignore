@@ -448,3 +448,5 @@ $RECYCLE.BIN/
 *.pfx
 
 api/NZWalks.API/Images/
+
+static/Images/

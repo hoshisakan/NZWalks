@@ -24,6 +24,13 @@ namespace NZWalks.API.Repositories
 
         public async Task<Image> UploadAsync(Image image)
         {
+            var checkDirectory = Path.Combine(_webHostEnvironment.ContentRootPath, "Images");
+
+            if (!Directory.Exists(checkDirectory))
+            {
+                Directory.CreateDirectory(checkDirectory);
+            }
+            
             var localFilePath = Path.Combine(
                 _webHostEnvironment.ContentRootPath,
                 "Images", $"{image.FileName}{image.FileExtension}"
