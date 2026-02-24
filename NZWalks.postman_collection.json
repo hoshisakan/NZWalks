@@ -1,0 +1,902 @@
+{
+  "info": {
+    "_postman_id": "6b113005-924f-4d3e-98e1-e9df49c27f17",
+    "name": "NZWalks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13694207",
+    "_collection_link": "https://go.postman.co/collection/13694207-6b113005-924f-4d3e-98e1-e9df49c27f17?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "regions",
+      "item": [
+        {
+          "name": "GetAll",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5MjA3NDQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.UYJiMGrmqArL2_CCvhNVi6kAYvnax0vNFywOA_Bpp5s",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/regions",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYWRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJyZWFkZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlYWRlciIsImV4cCI6MTc3MTg0MDg2NiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.JrJXaJwRN5zR3tMAWYV81TAgrbetpodibNM2qng0Loc",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/regions/6d807861-ca6e-48f8-27bc-08de72c19a40",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions",
+                "6d807861-ca6e-48f8-27bc-08de72c19a40"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTg0MTM3NCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.qyEG4cMxPd7kOjF3dAjgONIQI52Pet835EWUPTWUHaw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"WLG\",\r\n    \"name\": \"Wekkington Region\",\r\n    \"regionImageUrl\": \"some-image-wellington.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/regions",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create  By Model Validate Test",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"WLG\",\r\n    \"name\": \"Wekkington Region\",\r\n    \"regionImageUrl\": \"some-image-wellington.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/regions",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTg0MTM3NCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.qyEG4cMxPd7kOjF3dAjgONIQI52Pet835EWUPTWUHaw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"upd\",\r\n    \"name\": \"updated New region\",\r\n    \"regionImageUrl\": \"this is a new image.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/regions/6d807861-ca6e-48f8-27bc-08de72c19a40",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions",
+                "6d807861-ca6e-48f8-27bc-08de72c19a40"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By Model Validate Test",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"code\": \"up\",\r\n    \"name\": \"updated New region\",\r\n    \"regionImageUrl\": \"this is a new image.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/regions/8ad5d3e3-18b7-4e3e-922b-08de722ab7a1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions",
+                "8ad5d3e3-18b7-4e3e-922b-08de722ab7a1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTg0MTM3NCwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.qyEG4cMxPd7kOjF3dAjgONIQI52Pet835EWUPTWUHaw",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/regions/6d807861-ca6e-48f8-27bc-08de72c19a40",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "regions",
+                "6d807861-ca6e-48f8-27bc-08de72c19a40"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "difficulties",
+      "item": [
+        {
+          "name": "GetAll",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5MjA3NDQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.UYJiMGrmqArL2_CCvhNVi6kAYvnax0vNFywOA_Bpp5s",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/difficulties",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "difficulties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJlYWRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJyZWFkZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlYWRlciIsImV4cCI6MTc3MTkxMDY0NiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.K4Cc7IK4pRmbb1mdgcKp5oppuOr2fK8VZPhYqBMntww",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/difficulties/c3ba631f-887a-4075-b4cb-08de7362625f",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "difficulties",
+                "c3ba631f-887a-4075-b4cb-08de7362625f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTkxMDM3OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.CKbnDflvc3ujQqf9JH9UuRBICRvCkcRkfRV5fJxnqvA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"test create\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/difficulties",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "difficulties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTkxMDM3OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.CKbnDflvc3ujQqf9JH9UuRBICRvCkcRkfRV5fJxnqvA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"test update\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/difficulties/c3ba631f-887a-4075-b4cb-08de7362625f",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "difficulties",
+                "c3ba631f-887a-4075-b4cb-08de7362625f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IndyaXRlckBuendhbGtzLmNvbSIsImdpdmVuX25hbWUiOiJ3cml0ZXIwMSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IldyaXRlciIsImV4cCI6MTc3MTkxMDM3OSwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NTAxNyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTcifQ.CKbnDflvc3ujQqf9JH9UuRBICRvCkcRkfRV5fJxnqvA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/difficulties/c3ba631f-887a-4075-b4cb-08de7362625f",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "difficulties",
+                "c3ba631f-887a-4075-b4cb-08de7362625f"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "walks",
+      "item": [
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mount Victoria Lookout Walk\",\r\n  \"description\": \"This is an easy 20-30 minute walk to the lookout, which offers panoramic views of Wellington city, harbour and surrounding hills\",\r\n  \"lengthInKm\": 5,\r\n  \"walkImageUrl\": null,\r\n  \"difficultyId\": \"54466F17-02AF-48E7-8ED3-5A4A8BFACF6F\",\r\n  \"regionId\": \"CFA06ED2-BF65-4B65-93ED-C9D286DDB0DE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/walks",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create By Model Validate Test",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mount Victoria Lookout Walk\",\r\n  \"description\": \"This is an easy 20-30 minute walk to the lookout, which offers panoramic views of Wellington city, harbour and surrounding hills\",\r\n  \"lengthInKm\": 5,\r\n  \"walkImageUrl\": null,\r\n  \"difficultyId\": \"54466F17-02AF-48E7-8ED3-5A4A8BFACF6F\",\r\n  \"regionId\": \"CFA06ED2-BF65-4B65-93ED-C9D286DDB0DE\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/walks",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAll",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/walks",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAll By Filter Paramters",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/walks?sortBy=lengthInKm&isAscending=false&pageNumber=1&pageSize=14",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks"
+              ],
+              "query": [
+                {
+                  "key": "filterOn",
+                  "value": "name",
+                  "disabled": true
+                },
+                {
+                  "key": "filterQuery",
+                  "value": "walk",
+                  "disabled": true
+                },
+                {
+                  "key": "filterQuery",
+                  "value": "track",
+                  "disabled": true
+                },
+                {
+                  "key": "sortBy",
+                  "value": "name",
+                  "disabled": true
+                },
+                {
+                  "key": "sortBy",
+                  "value": "lengthInKm"
+                },
+                {
+                  "key": "isAscending",
+                  "value": "true",
+                  "disabled": true
+                },
+                {
+                  "key": "isAscending",
+                  "value": "false"
+                },
+                {
+                  "key": "pageNumber",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "14"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetById",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/walks/e4606bfc-c72f-4c6d-8222-08de729031f1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks",
+                "e4606bfc-c72f-4c6d-8222-08de729031f1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mount Victoria Lookout Walk - Updated\",\r\n  \"description\": \"This is an easy 20-30 minute walk to the lookout, which offers panoramic views of Wellington city, harbour and surrounding hills - Updated\",\r\n  \"lengthInKm\": 6,\r\n  \"walkImageUrl\": null,\r\n  \"difficultyId\": \"EA294873-7A8C-4C0F-BFA7-A2EB492CBF8C\",\r\n  \"regionId\": \"F7248FC3-2585-4EFB-8D1D-1C555F4087F6\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/walks/E4606BFC-C72F-4C6D-8222-08DE729031F1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks",
+                "E4606BFC-C72F-4C6D-8222-08DE729031F1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update By Model Validate Test",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Mount Victoria Lookout Walk - Updated\",\r\n  \"description\": \"This is an easy 20-30 minute walk to the lookout, which offers panoramic views of Wellington city, harbour and surrounding hills - Updated\",\r\n  \"lengthInKm\": 6,\r\n  \"walkImageUrl\": null,\r\n  \"difficultyId\": \"EA294873-7A8C-4C0F-BFA7-A2EB492CBF8C\",\r\n  \"regionId\": \"F7248FC3-2585-4EFB-8D1D-1C555F4087F6\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/walks/E4606BFC-C72F-4C6D-8222-08DE729031F1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks",
+                "E4606BFC-C72F-4C6D-8222-08DE729031F1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImludmVzdG9yODMzQGdtYWlsLmNvbSIsImdpdmVuX25hbWUiOiJpbnZlc3RvcjgzMyIsIm5iZiI6MTc3MTU5NDg2MCwiZXhwIjoxNzcyMTk5NjYwLCJpYXQiOjE3NzE1OTQ4NjAsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTE4NyJ9.zio5MfOZhwk1IAue0LQLrkUX6YW_Z9zeozpDjLsDz4X6TXPs70mDDkLWVx3e3WlHzT9v-Z2PQTgkZnVs7Mjoww",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/walks/e4606bfc-c72f-4c6d-8222-08de729031f1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "walks",
+                "e4606bfc-c72f-4c6d-8222-08de729031f1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "Register for Reader role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"reader01\",\r\n  \"email\": \"reader@nzwalks.com\",\r\n  \"password\": \"Reader@123\",\r\n  \"roles\": [\r\n    \"Reader\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register for Admin role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"admin01\",\r\n  \"email\": \"admin@nzwalks.com\",\r\n  \"password\": \"Admin@123\",\r\n  \"roles\": [\r\n    \"Admin\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register for Writer role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"writer01\",\r\n  \"email\": \"writer@nzwalks.com\",\r\n  \"password\": \"Writer@123\",\r\n  \"roles\": [\r\n    \"Writer\"\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with reader role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"reader@nzwalks.com\",\r\n  \"password\": \"Reader@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with admin role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"admin@example.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login with writer role",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"writer@nzwalks.com\",\r\n  \"password\": \"Writer@123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "image",
+      "item": [
+        {
+          "name": "Upload",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5MjA3NDQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.UYJiMGrmqArL2_CCvhNVi6kAYvnax0vNFywOA_Bpp5s",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "File",
+                  "type": "file",
+                  "uuid": "bd45b333-6053-4f1d-8845-c1dbcf25e9dc",
+                  "src": "/C:/Users/Ray/Desktop/deploy/2.png"
+                },
+                {
+                  "key": "FileName",
+                  "value": "FinShark2",
+                  "type": "text",
+                  "uuid": "11865cd5-e0a1-4a3b-ada8-f20c41a90e93"
+                },
+                {
+                  "key": "FileDescription",
+                  "value": "This is an image cover for FinShark",
+                  "type": "text",
+                  "uuid": "878b876d-9c74-4b7c-a693-5acfd0fc7b4b"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{url}}/image/upload",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "image",
+                "upload"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "",
+      "disabled": true
+    },
+    {
+      "key": "url",
+      "value": ""
+    }
+  ]
+}

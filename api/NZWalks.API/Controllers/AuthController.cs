@@ -58,6 +58,13 @@ namespace NZWalks.API.Controllers
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto registerRequestDto)
         {
+            var checkUserRoleIncludeAdmin = registerRequestDto.Roles.Contains("Admin");
+            
+            if (checkUserRoleIncludeAdmin)
+            {
+                return BadRequest("Admin user cannot be created through this endpoint!");
+            }
+
             var user = new IdentityUser
             {
                 UserName = registerRequestDto.Username,

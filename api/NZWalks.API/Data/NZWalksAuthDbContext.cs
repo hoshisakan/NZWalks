@@ -11,9 +11,11 @@ namespace NZWalks.API.Data
 {
     public class NZWalksAuthDbContext : IdentityDbContext
     {
-        public NZWalksAuthDbContext(DbContextOptions<NZWalksAuthDbContext> options) : base(options)
-        {
+        private readonly IConfiguration _configuration;
 
+        public NZWalksAuthDbContext(DbContextOptions<NZWalksAuthDbContext> options, IConfiguration configuration) : base(options)
+        {
+            _configuration = configuration;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -22,6 +24,7 @@ namespace NZWalks.API.Data
 
             var readerRoleId = "62f40933-2814-4672-9481-42259799cc90";
             var writerRoleId = "4321cc91-2cd7-4907-ad04-1649a78d54fd";
+            var adminRoleId = "89009c2e-ca38-4ea2-86d2-1db2d5f30449";
 
             var roles = new List<IdentityRole>
             {
@@ -37,8 +40,30 @@ namespace NZWalks.API.Data
                     Name = "Writer",
                     NormalizedName = "WRITER"
                 },
+                new IdentityRole{
+                    Id = adminRoleId,
+                    ConcurrencyStamp = adminRoleId,
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
+                }
             };
             modelBuilder.Entity<IdentityRole>().HasData(roles);
+
+            var adminUser = new IdentityUser{
+                Id = "4c791d74-5907-40ce-b188-034e6d60fed9",
+                UserName = _configuration["Admin:UserName"],
+                Email = _configuration["Admin:Email"],
+                NormalizedEmail = _configuration["Admin:Email"].ToUpper(),
+                NormalizedUserName = _configuration["Admin:UserName"].ToUpper(),
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, _configuration["Admin:Password"])
+            };
+            modelBuilder.Entity<IdentityUser>().HasData(adminUser);
+
+            var adminUserRole = new IdentityUserRole<string>{
+                UserId = adminUser.Id,
+                RoleId = adminRoleId
+            };
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(adminUserRole);
         }
     }
 }
