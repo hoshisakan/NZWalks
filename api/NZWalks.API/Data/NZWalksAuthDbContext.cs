@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using NZWalks.API.Models.Domain;
 
 
 namespace NZWalks.API.Data
@@ -17,6 +18,8 @@ namespace NZWalks.API.Data
         {
             _configuration = configuration;
         }
+
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

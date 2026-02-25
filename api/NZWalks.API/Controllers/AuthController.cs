@@ -36,14 +36,18 @@ namespace NZWalks.API.Controllers
 
                 if (result) {
                     var roles = await _userManager.GetRolesAsync(user);
+                    var jwtTokenId = Guid.NewGuid().ToString();
 
                     if (roles != null && roles.Any())
                     {
-                        var token = _tokenRepository.CreateJwtToken(user, roles.ToList());
+                        var jwtToken = _tokenRepository.CreateJwtToken(user, roles.ToList());
+
+                        var refreshToken = await _tokenRepository.CreateRefreshTokenAsync(user, jwtTokenId);
 
                         var response = new LoginResponseDto
                         {
-                            JWTToken = token
+                            JWTToken = jwtToken,
+                            RefreshToken = refreshToken
                         };
 
                         return Ok(response);
@@ -87,6 +91,50 @@ namespace NZWalks.API.Controllers
             }
 
             return BadRequest("Something went wrong!");
+        }
+
+        [HttpPost]
+        [Route("Refresh-Token")]
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDto tokenRequestDto)
+        {
+            var storedToken = await _tokenRepository.GetRefreshTokenAsync(tokenRequestDto.RefreshToken);
+
+            if (storedToken == null || storedToken.IsRevoked || storedToken.IsUsed || storedToken.ExpiryDate < DateTime.UtcNow)
+            {
+                return BadRequest("Invalid refresh token!");
+            }
+
+            var user = await _userManager.FindByIdAsync(storedToken.UserId);
+
+            if (user == null)
+            {
+                return BadRequest("Invalid user!");
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            await _tokenRepository.MarkRefreshTokenAsUsedAsync(tokenRequestDto.RefreshToken);
+
+            var newJwtToken = _tokenRepository.CreateJwtToken(user, roles.ToList());
+            var newRefreshToken = await _tokenRepository.CreateRefreshTokenAsync(user, Guid.NewGuid().ToString());
+
+            var response = new LoginResponseDto
+            {
+                JWTToken = newJwtToken,
+                RefreshToken = newRefreshToken
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("Logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout([FromBody] TokenRequestDto tokenRequestDto)
+        {
+            await _tokenRepository.RevokeRefreshTokenAsync(tokenRequestDto.RefreshToken);
+
+            return Ok("Logged out successfully!");
         }
     }
 }

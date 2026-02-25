@@ -20,7 +20,7 @@
             "header": [
               {
                 "key": "Authorization",
-                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5MjA3NDQsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.UYJiMGrmqArL2_CCvhNVi6kAYvnax0vNFywOA_Bpp5s",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5OTUwOTcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.lrsIDR8b6xfZjMUjVVF1qhzfWtIEWCmvZ81pKGz8Yxo",
                 "type": "text"
               }
             ],
@@ -861,6 +861,66 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"jwtToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5OTUwODEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.pgtWfmF27f_tqTTzYnQVqR8O4H8upI6XLkwc51xPkQY\",\r\n    \"refreshToken\": \"14693f47-60fa-4357-87e8-54cc924da19f-ebacebe5-0c73-44c1-9e00-c5ec325a87f8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/refresh-token",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5OTUwOTcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.lrsIDR8b6xfZjMUjVVF1qhzfWtIEWCmvZ81pKGz8Yxo",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"jwtToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGV4YW1wbGUuY29tIiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiQWRtaW4iLCJleHAiOjE3NzE5OTUwOTcsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjUwMTciLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo1MDE3In0.lrsIDR8b6xfZjMUjVVF1qhzfWtIEWCmvZ81pKGz8Yxo\",\r\n    \"refreshToken\": \"3fc48f74-26cf-4ce8-b6e5-7328d78c0a4c-6a4073cd-e13a-48ab-b9f2-285b9538cd28\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/logout",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -944,12 +1004,12 @@
   "variable": [
     {
       "key": "url",
-      "value": "",
-      "disabled": true
+      "value": ""
     },
     {
       "key": "url",
-      "value": ""
+      "value": "",
+      "disabled": true
     }
   ]
 }
