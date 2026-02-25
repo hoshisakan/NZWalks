@@ -67,6 +67,12 @@ export interface LoginRequestDto {
 
 export interface LoginResponseDto {
   JWTToken: string
+  RefreshToken: string
+}
+
+export interface TokenRequestDto {
+  JwtToken: string
+  RefreshToken: string
 }
 
 export interface RegisterRequestDto {

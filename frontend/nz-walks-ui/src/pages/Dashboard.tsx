@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -6,17 +6,64 @@ import RegionList from '../components/RegionList'
 import DifficultyList from '../components/DifficultyList'
 import WalkList from '../components/WalkList'
 import { useToast } from '../components/ui/ToastProvider'
-import { JWT_TOKEN_STORAGE_KEY } from '../constants/auth'
+import { AUTH_STATE_CHANGE_EVENT, JWT_TOKEN_STORAGE_KEY } from '../constants/auth'
 import apiClient from '../services/apiClient'
 import type { LoginResponseDto } from '../types'
+import {
+  getAccessToken,
+  getAccessTokenRemainingSeconds,
+  getLastTokenRefreshAt,
+  logoutAndRevokeRefreshToken,
+  saveTokens,
+  startTokenAutoRefresh,
+} from '../services/authService'
 
 const Dashboard = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useState(localStorage.getItem(JWT_TOKEN_STORAGE_KEY) ?? '')
+  const [token, setToken] = useState(getAccessToken())
+  const [remainingSeconds, setRemainingSeconds] = useState<number | null>(getAccessTokenRemainingSeconds())
+  const [lastRefreshAt, setLastRefreshAt] = useState<number | null>(getLastTokenRefreshAt())
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
   const { pushToast } = useToast()
+
+  const formatRemaining = (seconds: number | null): string => {
+    if (seconds === null) {
+      return '-'
+    }
+    const minutes = Math.floor(seconds / 60)
+    const remain = seconds % 60
+    return `${minutes}:${remain.toString().padStart(2, '0')}`
+  }
+
+  const formatLastRefresh = (value: number | null): string => {
+    if (!value) {
+      return '-'
+    }
+    return new Date(value).toLocaleString()
+  }
+
+  useEffect(() => {
+    startTokenAutoRefresh()
+
+    const handleAuthStateChanged = () => {
+      setToken(localStorage.getItem(JWT_TOKEN_STORAGE_KEY) ?? '')
+      setRemainingSeconds(getAccessTokenRemainingSeconds())
+      setLastRefreshAt(getLastTokenRefreshAt())
+    }
+
+    window.addEventListener(AUTH_STATE_CHANGE_EVENT, handleAuthStateChanged)
+    const intervalId = window.setInterval(() => {
+      setRemainingSeconds(getAccessTokenRemainingSeconds())
+      setLastRefreshAt(getLastTokenRefreshAt())
+    }, 1000)
+
+    return () => {
+      window.removeEventListener(AUTH_STATE_CHANGE_EVENT, handleAuthStateChanged)
+      window.clearInterval(intervalId)
+    }
+  }, [])
 
   const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -37,7 +84,14 @@ const Dashboard = () => {
         throw new Error('JWT token is missing in login response.')
       }
 
-      localStorage.setItem(JWT_TOKEN_STORAGE_KEY, tokenFromResponse)
+      const refreshToken =
+        response.data.RefreshToken ??
+        (response.data as LoginResponseDto & { refreshToken?: string }).refreshToken
+      if (!refreshToken) {
+        throw new Error('Refresh token is missing in login response.')
+      }
+
+      saveTokens(tokenFromResponse, refreshToken)
       setToken(tokenFromResponse)
       pushToast('Login successful.', 'success')
     } catch (err) {
@@ -56,10 +110,10 @@ const Dashboard = () => {
     }
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem(JWT_TOKEN_STORAGE_KEY)
+  const handleLogout = async () => {
+    await logoutAndRevokeRefreshToken()
     setToken('')
-    pushToast('Logged out.', 'info')
+    pushToast('Logged out and refresh token revoked.', 'info')
   }
 
   return (
@@ -131,6 +185,12 @@ const Dashboard = () => {
 
           <p className="mt-3 text-sm font-medium text-slate-700">
             Token status: {token ? 'Ready' : 'Not found'}
+          </p>
+          <p className="text-sm text-slate-600">
+            Access token expires in: <span className="font-semibold">{formatRemaining(remainingSeconds)}</span>
+          </p>
+          <p className="text-sm text-slate-600">
+            Last refresh time: <span className="font-semibold">{formatLastRefresh(lastRefreshAt)}</span>
           </p>
         </section>
 
