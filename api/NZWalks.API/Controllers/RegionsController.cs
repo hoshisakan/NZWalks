@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NZWalks.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Models.DTO;
-using NZWalks.API.Repositories;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using NZWalks.API.CustomActionFilters;
 using Microsoft.AspNetCore.Identity;
+using NZWalks.API.Services;
 
 
 namespace NZWalks.API.Controllers
@@ -20,26 +18,19 @@ namespace NZWalks.API.Controllers
     [Authorize]
     public class RegionsController : ControllerBase
     {
-        private readonly IRegionRepository _regionRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger<RegionsController> _logger;
+        private readonly IRegionService _regionService;
 
-        public RegionsController(IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger)
+        public RegionsController(IRegionService regionService)
         {
-            _regionRepository = regionRepository;
-            _mapper = mapper;
-            _logger = logger;
+            _regionService = regionService;
         }
 
         [HttpGet]
         [Authorize(Roles = "Reader,Admin")]
         public async Task<IActionResult> GetAll()
         {
-            var regions = await _regionRepository.GetAllAsync();
-
-            var regionsDto = _mapper.Map<List<RegionDto>>(regions);
-
-            return Ok(regionsDto);
+            var regions = await _regionService.GetAllAsync();
+            return Ok(regions);
         }
 
         [HttpGet]
@@ -47,16 +38,14 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Reader,Admin")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var region = await _regionRepository.GetByIdAsync(id);
+            var region = await _regionService.GetByIdAsync(id);
 
             if (region == null)
             {
-                return NotFound();
+                return NotFound("Region not found");
             }
 
-            var regionDto = _mapper.Map<RegionDto>(region);
-
-            return Ok(regionDto);
+            return Ok(region);
         }
 
         [HttpPost]
@@ -64,13 +53,8 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionRequestDto)
         {
-            var region = _mapper.Map<Region>(addRegionRequestDto);
-
-            region = await _regionRepository.CreateAsync(region);
-
-            var regionDto = _mapper.Map<RegionDto>(region);
-
-            return CreatedAtAction(nameof(GetById), new { id = regionDto.Id }, regionDto);
+            var region = await _regionService.CreateAsync(addRegionRequestDto);
+            return CreatedAtAction(nameof(GetById), new { id = region.Id }, region);
         }
 
         [HttpPut]
@@ -79,18 +63,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
-            var region = _mapper.Map<Region>(updateRegionRequestDto);
-
-            region = await _regionRepository.UpdateAsync(id, region);
-
+            var region = await _regionService.UpdateAsync(id, updateRegionRequestDto);
             if (region == null)
             {
                 return NotFound("Region not found");
             }
-
-            var regionDto = _mapper.Map<RegionDto>(region);
-
-            return Ok(regionDto);
+            return Ok(region);
         }
 
         [HttpDelete]
@@ -98,16 +76,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var region = await _regionRepository.DeleteAsync(id);
-
+            var region = await _regionService.DeleteAsync(id);
             if (region == null)
             {
                 return NotFound("Region not found");
             }
-
-            var regionDto = _mapper.Map<RegionDto>(region);
-
-            return Ok(regionDto);
+            return Ok(region);
         }
     }
 }

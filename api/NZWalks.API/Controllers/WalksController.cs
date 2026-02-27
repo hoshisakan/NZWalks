@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NZWalks.API.Models.Domain;
-using NZWalks.API.Models.DTO;
-using NZWalks.API.Repositories;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using NZWalks.API.CustomActionFilters;
+using NZWalks.API.Services;
+using NZWalks.API.Models.DTO;
 
 
 namespace NZWalks.API.Controllers
@@ -20,13 +18,11 @@ namespace NZWalks.API.Controllers
     [Authorize]
     public class WalksController : ControllerBase
     {
-        private readonly IWalkRepository _walkRepository;
-        private readonly IMapper _mapper;
+        private readonly IWalkService _walkService;
 
-        public WalksController(IWalkRepository walkRepository, IMapper mapper)
+        public WalksController(IWalkService walkService)
         {
-            _walkRepository = walkRepository;
-            _mapper = mapper;
+            _walkService = walkService;
         }
 
         [HttpGet]
@@ -35,12 +31,9 @@ namespace NZWalks.API.Controllers
         [FromQuery] string? sortBy, [FromQuery] bool isAscending,
         [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 1000)
         {
-            var walks = await _walkRepository.GetAllAsync(filterOn, filterQuery, sortBy, 
-                isAscending, pageNumber, pageSize);
+            var walks = await _walkService.GetAllAsync(filterOn, filterQuery, sortBy, isAscending, pageNumber, pageSize);
 
-            var walksDto = _mapper.Map<List<WalkDto>>(walks);
-
-            return Ok(walksDto);
+            return Ok(walks);
         }
 
         [HttpGet]
@@ -48,16 +41,12 @@ namespace NZWalks.API.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var walk = await _walkRepository.GetByIdAsync(id);
-
+            var walk = await _walkService.GetByIdAsync(id);
             if (walk == null)
             {
-                return NotFound();
+                return NotFound("Walk not found");
             }
-
-            var walkDto = _mapper.Map<WalkDto>(walk);
-
-            return Ok(walkDto);
+            return Ok(walk);
         }
         
         [HttpPost]
@@ -65,13 +54,8 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
         {
-            var walk = _mapper.Map<Walk>(addWalkRequestDto);
-
-            walk = await _walkRepository.CreateAsync(walk);
-
-            var walkDto = _mapper.Map<WalkDto>(walk);
-
-            return CreatedAtAction(nameof(GetById), new { id = walkDto.Id }, walkDto);
+            var walk = await _walkService.CreateAsync(addWalkRequestDto);
+            return CreatedAtAction(nameof(GetById), new { id = walk.Id }, walk);
         }
 
         [HttpPut]
@@ -80,18 +64,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWalkRequestDto updateWalkRequestDto)
         {
-            var walk = _mapper.Map<Walk>(updateWalkRequestDto);
-
-            walk = await _walkRepository.UpdateAsync(id, walk);
-
+            var walk = await _walkService.UpdateAsync(id, updateWalkRequestDto);
             if (walk == null)
             {
                 return NotFound("Walk not found");
             }
-
-            var walkDto = _mapper.Map<WalkDto>(walk);
-
-            return Ok(walkDto);
+            return Ok(walk);
         }
 
         [HttpDelete]
@@ -99,16 +77,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var walk = await _walkRepository.DeleteAsync(id);
-
+            var walk = await _walkService.DeleteAsync(id);
             if (walk == null)
             {
                 return NotFound("Walk not found");
             }
-
-            var walkDto = _mapper.Map<WalkDto>(walk);
-
-            return Ok(walkDto);
+            return Ok(walk);
         }
     }
 }

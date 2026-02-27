@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using NZWalks.API.Models.Domain;
 using NZWalks.API.Models.DTO;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace NZWalks.API.Mappings
@@ -22,6 +23,10 @@ namespace NZWalks.API.Mappings
             CreateMap<Difficulty, DifficultyDto>().ReverseMap();
             CreateMap<Difficulty, AddDifficultyRequestDto>().ReverseMap();
             CreateMap<Difficulty, UpdateDifficultyRequestDto>().ReverseMap();
+            CreateMap<Image, ImageDto>().ReverseMap();
+            CreateMap<Image, ImageUploadRequestDto>().ReverseMap();
+            CreateMap<IdentityUser, RegisterResponseDto>().ReverseMap();
+            CreateMap<IdentityUser, LoginResponseDto>().ReverseMap();
         }
     }
 }

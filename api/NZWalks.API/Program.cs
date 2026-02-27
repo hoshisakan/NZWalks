@@ -15,6 +15,7 @@ using Microsoft.Extensions.FileProviders;
 using Serilog;
 using NZWalks.API.Middlewares;
 using Microsoft.AspNetCore.HttpOverrides;
+using NZWalks.API.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,6 +84,11 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<IDifficultyRepository, DifficultyRepository>();
 
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDifficultyService, DifficultyService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IRegionService, RegionService>();
+builder.Services.AddScoped<IWalkService, WalkService>();
 
 builder.Services.AddAutoMapper(cfg => { }, typeof(AutoMapperProfiles).Assembly);
 

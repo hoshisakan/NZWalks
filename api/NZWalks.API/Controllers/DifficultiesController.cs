@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NZWalks.API.Models.Domain;
-using NZWalks.API.Data;
 using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Models.DTO;
-using NZWalks.API.Repositories;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using NZWalks.API.CustomActionFilters;
 using Microsoft.AspNetCore.Identity;
+using NZWalks.API.Services;
 
 
 namespace NZWalks.API.Controllers
@@ -21,26 +18,19 @@ namespace NZWalks.API.Controllers
     [Authorize]
     public class DifficultiesController : ControllerBase
     {
-        private readonly IDifficultyRepository _difficultyRepository;
-        private readonly IMapper _mapper;
-        private readonly ILogger<DifficultiesController> _logger;
+        private readonly IDifficultyService _difficultyService;
 
-        public DifficultiesController(IDifficultyRepository difficultyRepository, IMapper mapper, ILogger<DifficultiesController> logger)
+        public DifficultiesController(IDifficultyService difficultyService)
         {
-            _difficultyRepository = difficultyRepository;
-            _mapper = mapper;
-            _logger = logger;
+            _difficultyService = difficultyService;
         }
 
         [HttpGet]
         [Authorize(Roles = "Reader,Admin")]
         public async Task<IActionResult> GetAll()
         {
-            var difficulties = await _difficultyRepository.GetAllAsync();
-
-            var difficultiesDto = _mapper.Map<List<DifficultyDto>>(difficulties);
-
-            return Ok(difficultiesDto);
+            var difficulties = await _difficultyService.GetAllAsync();
+            return Ok(difficulties);
         }
 
         [HttpGet]
@@ -48,16 +38,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Reader,Admin")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var difficulty = await _difficultyRepository.GetByIdAsync(id);
-
+            var difficulty = await _difficultyService.GetByIdAsync(id);
             if (difficulty == null)
             {
                 return NotFound();
             }
-
-            var difficultyDto = _mapper.Map<DifficultyDto>(difficulty);
-
-            return Ok(difficultyDto);
+            return Ok(difficulty);
         }
 
         [HttpPost]
@@ -65,13 +51,8 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Create([FromBody] AddDifficultyRequestDto addDifficultyRequestDto)
         {
-            var difficulty = _mapper.Map<Difficulty>(addDifficultyRequestDto);
-            
-            difficulty = await _difficultyRepository.CreateAsync(difficulty);
-
-            var difficultyDto = _mapper.Map<DifficultyDto>(difficulty);
-
-            return CreatedAtAction(nameof(GetById), new { id = difficultyDto.Id }, difficultyDto);
+            var difficulty = await _difficultyService.CreateAsync(addDifficultyRequestDto);
+            return CreatedAtAction(nameof(GetById), new { id = difficulty.Id }, difficulty);
         }
 
         [HttpPut]
@@ -80,18 +61,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateDifficultyRequestDto updateDifficultyRequestDto)
         {
-            var difficulty = _mapper.Map<Difficulty>(updateDifficultyRequestDto);
-            
-            difficulty = await _difficultyRepository.UpdateAsync(id, difficulty);
-
+            var difficulty = await _difficultyService.UpdateAsync(id, updateDifficultyRequestDto);
             if (difficulty == null)
             {
                 return NotFound();
             }
-
-            var difficultyDto = _mapper.Map<DifficultyDto>(difficulty);
-
-            return Ok(difficultyDto);
+            return Ok(difficulty);
         }
 
         [HttpDelete]
@@ -99,16 +74,12 @@ namespace NZWalks.API.Controllers
         [Authorize(Roles = "Writer,Admin")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
-            var difficulty = await _difficultyRepository.DeleteAsync(id);
-
+            var difficulty = await _difficultyService.DeleteAsync(id);
             if (difficulty == null)
             {
                 return NotFound();
             }
-
-            var difficultyDto = _mapper.Map<DifficultyDto>(difficulty);
-
-            return Ok(difficultyDto);
+            return Ok(difficulty);
         }
     }
 }

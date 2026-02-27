@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NZWalks.API.Models.DTO;
-using NZWalks.API.Models.Domain;
-using NZWalks.API.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using NZWalks.API.Services;
 
 
 namespace NZWalks.API.Controllers
@@ -16,11 +15,11 @@ namespace NZWalks.API.Controllers
     [Authorize]
     public class ImageController : ControllerBase
     {
-        private readonly IImageRepository _imageRepository;
+        private readonly IImageService _imageService;
 
-        public ImageController(IImageRepository imageRepository)
+        public ImageController(IImageService imageService)
         {
-            _imageRepository = imageRepository;
+            _imageService = imageService;
         }
 
         [HttpPost]
@@ -30,24 +29,14 @@ namespace NZWalks.API.Controllers
         {
             ValidateFileUpload(imageUploadRequestDto);
             
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var image = new Image
-                {
-                    File = imageUploadRequestDto.File,
-                    FileName = imageUploadRequestDto.FileName,
-                    FileDescription = imageUploadRequestDto.FileDescription,
-                    FileExtension = Path.GetExtension(imageUploadRequestDto.File.FileName),
-                    FileSizeInBytes = imageUploadRequestDto.File.Length,
-                    // FilePath = imageUploadRequestDto.File.FileName
-                };
-
-                var result = await _imageRepository.UploadAsync(image);
-
-                return Ok(result);
+                return BadRequest(ModelState);
             }
 
-            return BadRequest(ModelState);
+            var image = await _imageService.UploadAsync(imageUploadRequestDto);
+
+            return Ok(image);
         }
 
         private void ValidateFileUpload(ImageUploadRequestDto imageUploadRequestDto)
