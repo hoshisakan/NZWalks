@@ -36,7 +36,7 @@ namespace NZWalks.API.Services
             
             if (walk == null)
             {
-                return null;
+                throw new Exception("Walk not found!");
             }
             return _mapper.Map<WalkDto>(walk);
         }
@@ -55,7 +55,7 @@ namespace NZWalks.API.Services
             walk = await _walkRepository.UpdateAsync(id, walk);
             if (walk == null)
             {
-                return null;
+                throw new Exception("Walk not found!");
             }
             return _mapper.Map<WalkDto>(walk);
         }
@@ -66,7 +66,7 @@ namespace NZWalks.API.Services
             return _mapper.Map<WalkDto>(walk);
             if (walk == null)
             {
-                return null;
+                throw new Exception("Walk not found!");
             }
             return _mapper.Map<WalkDto>(walk);
         }

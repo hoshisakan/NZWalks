@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System.Net;
+using NZWalks.API.Exceptions;
 
 
 namespace NZWalks.API.Middlewares
@@ -14,11 +15,13 @@ namespace NZWalks.API.Middlewares
     {
         private readonly ILogger<ExceptionHandlerMiddleware> _logger;
         private readonly RequestDelegate _next;
+        private readonly IWebHostEnvironment _environment;
 
-        public ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger, RequestDelegate next)
+        public ExceptionHandlerMiddleware(ILogger<ExceptionHandlerMiddleware> logger, RequestDelegate next, IWebHostEnvironment environment)
         {
             _logger = logger;
             _next = next;
+            _environment = environment;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -33,16 +36,30 @@ namespace NZWalks.API.Middlewares
 
                 _logger.LogError(ex, $"{errorId} : {ex.Message}");
 
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                var statusCode = ex switch
+                {
+                    ArgumentNullException => StatusCodes.Status400BadRequest,
+                    ArgumentException => StatusCodes.Status400BadRequest,
+                    InvalidOperationException => StatusCodes.Status400BadRequest,
+                    UnauthorizedAccessException => StatusCodes.Status401Unauthorized,
+                    ForbiddenException => StatusCodes.Status403Forbidden,
+                    NotFoundException => StatusCodes.Status404NotFound,
+                    Exception => StatusCodes.Status500InternalServerError,
+                    _ => StatusCodes.Status500InternalServerError
+                };
+
+                context.Response.StatusCode = (int)statusCode;
                 context.Response.ContentType = "application/json";
 
                 var error = new
                 {
                     Id = errorId,
-                    ErrorMessage = "An internal server error occurred while processing the request."
+                    ErrorMessage = ex.Message,
+                    StackTrace = _environment.IsDevelopment() ? ex.StackTrace : null
                 };
 
                 await context.Response.WriteAsJsonAsync(error);
+
             }
         }
     }

@@ -39,12 +39,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var region = await _regionService.GetByIdAsync(id);
-
-            if (region == null)
-            {
-                return NotFound("Region not found");
-            }
-
             return Ok(region);
         }
 
@@ -64,10 +58,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateRegionRequestDto updateRegionRequestDto)
         {
             var region = await _regionService.UpdateAsync(id, updateRegionRequestDto);
-            if (region == null)
-            {
-                return NotFound("Region not found");
-            }
             return Ok(region);
         }
 
@@ -77,10 +67,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var region = await _regionService.DeleteAsync(id);
-            if (region == null)
-            {
-                return NotFound("Region not found");
-            }
             return Ok(region);
         }
     }

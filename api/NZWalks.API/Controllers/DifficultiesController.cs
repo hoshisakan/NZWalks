@@ -39,10 +39,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var difficulty = await _difficultyService.GetByIdAsync(id);
-            if (difficulty == null)
-            {
-                return NotFound();
-            }
             return Ok(difficulty);
         }
 
@@ -62,10 +58,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateDifficultyRequestDto updateDifficultyRequestDto)
         {
             var difficulty = await _difficultyService.UpdateAsync(id, updateDifficultyRequestDto);
-            if (difficulty == null)
-            {
-                return NotFound();
-            }
             return Ok(difficulty);
         }
 
@@ -75,10 +67,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var difficulty = await _difficultyService.DeleteAsync(id);
-            if (difficulty == null)
-            {
-                return NotFound();
-            }
             return Ok(difficulty);
         }
     }

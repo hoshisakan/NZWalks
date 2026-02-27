@@ -26,7 +26,7 @@ namespace NZWalks.API.Services
             
             if (user == null)
             {
-                return null;
+                throw new Exception("User not found!");
             }
 
             var result = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
@@ -50,7 +50,7 @@ namespace NZWalks.API.Services
                     return response;
                 }
             }
-            return null;
+            throw new Exception("Username not found and/or password is incorrect!");
         }
 
         public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto registerRequestDto)
@@ -59,7 +59,7 @@ namespace NZWalks.API.Services
             
             if (checkUserRoleIncludeAdmin)
             {
-                return null;
+                throw new Exception("User cannot be an admin!");
             }
 
             var user = new IdentityUser
@@ -85,7 +85,7 @@ namespace NZWalks.API.Services
                     }
                 }
             }
-            return null;
+            throw new Exception("User not created!");
         }
 
         public async Task<LoginResponseDto> RefreshTokenAsync(TokenRequestDto tokenRequestDto)
@@ -93,13 +93,13 @@ namespace NZWalks.API.Services
             var storedToken = await _tokenRepository.GetRefreshTokenAsync(tokenRequestDto.RefreshToken);
             if (storedToken == null || storedToken.IsRevoked || storedToken.IsUsed || storedToken.ExpiryDate < DateTime.UtcNow)
             {
-                return null;
+                throw new Exception("Invalid refresh token!");
             }
 
             var user = await _userManager.FindByIdAsync(storedToken.UserId);
             if (user == null)
             {
-                return null;
+                throw new Exception("Invalid refresh token!");
             }
 
             var roles = await _userManager.GetRolesAsync(user);

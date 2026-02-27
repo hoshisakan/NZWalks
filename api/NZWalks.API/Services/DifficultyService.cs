@@ -33,7 +33,7 @@ namespace NZWalks.API.Services
             
             if (difficulty == null)
             {
-                return null;
+                throw new Exception("Difficulty not found!");
             }
             return _mapper.Map<DifficultyDto>(difficulty);
         }
@@ -51,7 +51,7 @@ namespace NZWalks.API.Services
             difficulty = await _difficultyRepository.UpdateAsync(id, difficulty);
             if (difficulty == null)
             {
-                return null;
+                throw new Exception("Difficulty not found!");
             }
             return _mapper.Map<DifficultyDto>(difficulty);
         }
@@ -61,7 +61,7 @@ namespace NZWalks.API.Services
             var difficulty = await _difficultyRepository.DeleteAsync(id);
             if (difficulty == null)
             {
-                return null;
+                throw new Exception("Difficulty not found!");
             }
             return _mapper.Map<DifficultyDto>(difficulty);
         }

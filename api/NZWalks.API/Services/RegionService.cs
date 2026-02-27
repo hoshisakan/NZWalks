@@ -33,7 +33,7 @@ namespace NZWalks.API.Services
 
             if (region == null)
             {
-                return null;
+                throw new Exception("Region not found!");
             }
 
             return _mapper.Map<RegionDto>(region);
@@ -53,7 +53,7 @@ namespace NZWalks.API.Services
             region = await _regionRepository.UpdateAsync(id, region);
             if (region == null)
             {
-                return null;
+                throw new Exception("Region not found!");
             }
             return _mapper.Map<RegionDto>(region);
         }
@@ -63,7 +63,7 @@ namespace NZWalks.API.Services
             var region = await _regionRepository.DeleteAsync(id);
             if (region == null)
             {
-                return null;
+                throw new Exception("Region not found!");
             }
             return _mapper.Map<RegionDto>(region);
         }

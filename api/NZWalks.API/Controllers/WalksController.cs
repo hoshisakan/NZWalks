@@ -42,10 +42,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var walk = await _walkService.GetByIdAsync(id);
-            if (walk == null)
-            {
-                return NotFound("Walk not found");
-            }
             return Ok(walk);
         }
         
@@ -65,10 +61,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateWalkRequestDto updateWalkRequestDto)
         {
             var walk = await _walkService.UpdateAsync(id, updateWalkRequestDto);
-            if (walk == null)
-            {
-                return NotFound("Walk not found");
-            }
             return Ok(walk);
         }
 
@@ -78,10 +70,6 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var walk = await _walkService.DeleteAsync(id);
-            if (walk == null)
-            {
-                return NotFound("Walk not found");
-            }
             return Ok(walk);
         }
     }
