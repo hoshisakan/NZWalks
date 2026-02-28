@@ -134,7 +134,7 @@ const DifficultyList = () => {
             <div className="mb-4 flex items-center justify-between">
                 <div>
                     <h2 className="text-xl font-semibold text-slate-800">Difficulty List</h2>
-                    <p className="text-sm text-slate-500">Data source: GET /api/Difficulties</p>
+                    <p className="text-sm text-slate-500">Data source: GET /api/v1/Difficulties</p>
                 </div>
                 <button
                     type="button"

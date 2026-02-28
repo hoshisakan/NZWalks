@@ -167,7 +167,7 @@ const RegionList = () => {
             <div className="mb-4 flex items-center justify-between">
                 <div>
                     <h2 className="text-xl font-semibold text-slate-800">Region List</h2>
-                    <p className="text-sm text-slate-500">Data source: GET /api/Regions</p>
+                    <p className="text-sm text-slate-500">Data source: GET /api/v1/Regions</p>
                 </div>
                 <button
                     type="button"

@@ -77,7 +77,7 @@ const RegisterPage = () => {
                 <h1 className="text-2xl font-bold text-slate-800">Create Account</h1>
                 <p className="mt-1 text-sm text-slate-500">
                     Register API:{' '}
-                    <code className="rounded bg-slate-100 px-1 py-0.5">POST https://localhost/api/Auth/Register</code>
+                    <code className="rounded bg-slate-100 px-1 py-0.5">POST https://localhost/api/v1/Auth/Register</code>
                 </p>
 
                 <form className="mt-5 grid gap-3" onSubmit={handleSubmit}>

@@ -119,18 +119,18 @@ const Dashboard = () => {
                     <h1 className="text-2xl font-bold text-slate-800">NZWalks Management Dashboard</h1>
                     <p className="mt-1 text-sm text-slate-500">
                         Login API:{' '}
-                        <code className="rounded bg-slate-100 px-1 py-0.5">POST https://localhost/api/Auth/Login</code>
+                        <code className="rounded bg-slate-100 px-1 py-0.5">POST https://localhost/api/v1/Auth/Login</code>
                     </p>
                     <p className="text-sm text-slate-500">
                         Regions API:{' '}
-                        <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/Regions</code>
+                        <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/v1/Regions</code>
                     </p>
                     <p className="text-sm text-slate-500">
                         Difficulties API:{' '}
-                        <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/Difficulties</code>
+                        <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/v1/Difficulties</code>
                     </p>
                     <p className="text-sm text-slate-500">
-                        Walks API: <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/Walks</code>
+                        Walks API: <code className="rounded bg-slate-100 px-1 py-0.5">https://localhost/api/v1/Walks</code>
                     </p>
 
                     <form className="mt-4 grid gap-3 md:max-w-md" onSubmit={handleLogin}>

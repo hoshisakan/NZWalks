@@ -272,7 +272,7 @@ const WalkList = ({ authToken }: WalkListProps) => {
             <div className="mb-4 flex items-center justify-between">
                 <div>
                     <h2 className="text-xl font-semibold text-slate-800">Walk List</h2>
-                    <p className="text-sm text-slate-500">Data source: GET /api/Walks</p>
+                    <p className="text-sm text-slate-500">Data source: GET /api/v1/Walks</p>
                     {!authToken && (
                         <p className="text-xs text-amber-700">Login required to load region/difficulty options.</p>
                     )}
