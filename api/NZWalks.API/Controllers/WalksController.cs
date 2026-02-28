@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using System.ComponentModel.DataAnnotations;
 using NZWalks.API.CustomActionFilters;
-using NZWalks.API.Services;
-using NZWalks.API.Models.DTO;
+using NZWalks.Application.Services;
+using NZWalks.Application.DTO;
 using Asp.Versioning;
 
 

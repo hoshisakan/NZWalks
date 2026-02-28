@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NZWalks.API.Models.DTO;
+using NZWalks.Application.DTO;
 using Microsoft.AspNetCore.Authorization;
-using NZWalks.API.Services;
+using NZWalks.Application.Services;
 using Asp.Versioning;
 
 

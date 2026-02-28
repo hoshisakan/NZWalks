@@ -1,26 +1,26 @@
-using NZWalks.API.Data;
 using Microsoft.EntityFrameworkCore;
-using NZWalks.API.Repositories;
-using NZWalks.API.Mappings;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
 using Serilog;
-using NZWalks.API.Middlewares;
 using Microsoft.AspNetCore.HttpOverrides;
-using NZWalks.API.Services;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using NZWalks.API.Configurations;
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
+using NZWalks.API.Middlewares;
+using NZWalks.API.Configurations;
+using NZWalks.Infrastructure.Data;
+using NZWalks.Domain.Repositories;
+using NZWalks.Infrastructure.Repositories;
+using NZWalks.Application.Repositories;
+using NZWalks.Application.Services;
+using NZWalks.Application.Mappings;
+using NZWalks.Infrastructure.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);

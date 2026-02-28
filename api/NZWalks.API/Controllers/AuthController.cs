@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using NZWalks.API.Models.DTO;
-using NZWalks.API.Services;
+using NZWalks.Application.DTO;
+using NZWalks.Application.Services;
 using Asp.Versioning;
 
 

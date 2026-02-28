@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NZWalks.API.Models.DTO;
+using NZWalks.Application.DTO;
 using Microsoft.AspNetCore.Authorization;
 using NZWalks.API.CustomActionFilters;
-using Microsoft.AspNetCore.Identity;
-using NZWalks.API.Services;
+using NZWalks.Application.Services;
 using Asp.Versioning;
 
 
