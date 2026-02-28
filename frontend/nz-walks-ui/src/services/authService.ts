@@ -8,7 +8,7 @@ import {
 import type { LoginResponseDto, TokenRequestDto } from '../types';
 
 const authHttpClient = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL ?? 'https://localhost/api',
+    baseURL: import.meta.env.VITE_API_BASE_URL ?? 'https://localhost/api/v1',
     headers: {
         'Content-Type': 'application/json',
     },
