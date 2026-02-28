@@ -9,11 +9,13 @@ using System.ComponentModel.DataAnnotations;
 using NZWalks.API.CustomActionFilters;
 using NZWalks.API.Services;
 using NZWalks.API.Models.DTO;
+using Asp.Versioning;
 
 
 namespace NZWalks.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     [ApiController]
     [Authorize]
     public class WalksController : ControllerBase
